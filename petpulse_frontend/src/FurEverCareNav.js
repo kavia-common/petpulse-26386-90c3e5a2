@@ -102,6 +102,18 @@ function FurEverCareNav() {
         </div>
         {/* The navigation bar structure strictly as specified */}
         <ul className="fc-nav-horizontal-list">
+          {/* Dashboard main link */}
+          <li className="fc-nav-horizontal-item">
+            <Link
+              to="/dashboard"
+              className="fc-nav-horizontal-section"
+              style={{ fontWeight: 600, color: "var(--fc-primary)" }}
+              tabIndex={0}
+            >
+              <span className="fc-nav-icon" style={{ color: "var(--fc-primary)" }}>🏡</span>
+              Dashboard
+            </Link>
+          </li>
           {/* My Pets dropdown */}
           <li
             className={
