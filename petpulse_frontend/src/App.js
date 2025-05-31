@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import FurEverCareLandingPage from './FurEverCareLandingPage';
-import FurEverCareHomePage from './FurEverCareHomePage';
 import FurEverCareNav from './FurEverCareNav';
 import DashboardPage from './DashboardPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -9,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 /**
  * PUBLIC_INTERFACE
  * Main App router for FurEverCare. Renders global navigation and 
- * switches between the new landing page and the main dashboard/home page.
+ * switches between the new landing page and the dashboard page.
  */
 function App() {
   return (
