@@ -19,8 +19,7 @@ function App() {
         <div style={{ marginTop: 60 }}> {/* Avoid nav overlap */}
           <Routes>
             <Route path="/" element={<FurEverCareLandingPage />} />
-            <Route path="/dashboard" element={<FurEverCareHomePage />} />
-            <Route path="/dashboard2" element={<DashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             {/* Add more routes as the app grows */}
           </Routes>
         </div>
