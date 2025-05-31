@@ -160,35 +160,7 @@ function FurEverCareNav() {
               <span className="fc-nav-chevron">{dropdowns.settings ? "▲" : "▼"}</span>
             </button>
             <ul className={"fc-nav-horizontal-dropdown" + (dropdowns.settings ? " open" : "")}>
-              <li
-                className={"fc-nav-horiz-subitem" + (dropdowns.settingsAccount ? " open" : "")}
-                onMouseEnter={e => setDropdowns(d => ({ ...d, settingsAccount: true }))}
-                onFocus={e => setDropdowns(d => ({ ...d, settingsAccount: true }))}
-                onMouseLeave={e => setDropdowns(d => ({ ...d, settingsAccount: false }))}
-              >
-                <button
-                  className="fc-nav-horizontal-subsection"
-                  aria-expanded={dropdowns.settingsAccount}
-                  aria-haspopup="true"
-                  onClick={e => setDropdowns(d => ({ ...d, settingsAccount: !d.settingsAccount }))}
-                  tabIndex={0}
-                  onKeyDown={e => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setDropdowns(d => ({ ...d, settingsAccount: !d.settingsAccount }));
-                    } else if (e.key === "Escape") {
-                      setDropdowns(d => ({ ...d, settingsAccount: false }));
-                    }
-                  }}
-                >
-                  Account
-                  <span className="fc-nav-chevron-sm">{dropdowns.settingsAccount ? "▲" : "▼"}</span>
-                </button>
-                <ul className={"fc-nav-horizontal-supdropdown" + (dropdowns.settingsAccount ? " open" : "")}>
-                  <li><a href="#account-login">Login</a></li>
-                  <li><a href="#account-signup">Signup</a></li>
-                </ul>
-              </li>
+              {/* Removed Account -> (Login, Signup) section since those buttons are now visible as main nav actions */}
               <li><a href="#support">Support</a></li>
               <li><a href="#contact">Contact</a></li>
               <li><a href="#help">Help</a></li>
