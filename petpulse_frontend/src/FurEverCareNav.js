@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./FurEverCareNav.css";
+import { Link, useLocation } from "react-router-dom";
 
 /*
   FurEverCareNav Navigation Component – Updated for strict dropdown hierarchy
@@ -92,8 +93,12 @@ function FurEverCareNav() {
     >
       <div className="fc-navbar-content">
         <div className="fc-nav-horizontal-header">
-          <a href="#main" className="fc-logo" aria-label="FurEverCare Logo" style={{ textDecoration: "none" }}>🐾</a>
-          <a href="#main" className="fc-title" style={{ color: "var(--fc-primary)", textDecoration: "none" }}>FurEverCare</a>
+          <Link to="/" className="fc-logo" aria-label="FurEverCare Logo" style={{ textDecoration: "none" }}>
+            🐾
+          </Link>
+          <Link to="/" className="fc-title" style={{ color: "var(--fc-primary)", textDecoration: "none" }}>
+            FurEverCare
+          </Link>
         </div>
         {/* The navigation bar structure strictly as specified */}
         <ul className="fc-nav-horizontal-list">
