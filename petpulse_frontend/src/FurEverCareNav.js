@@ -205,12 +205,22 @@ function FurEverCareNav() {
                   className="fc-nav-horizontal-subsection"
                   aria-haspopup="true"
                   aria-expanded={dropdowns.settingsAccount}
-                  onClick={handleSettingsAccountOpen}
+                  onClick={e => {
+                    e.stopPropagation();
+                    // Toggle open/close on click (allow touchscreen/click)
+                    setDropdowns(d => ({
+                      ...d,
+                      settingsAccount: !d.settingsAccount,
+                      // keep settings open
+                      settings: true,
+                    }));
+                  }}
                   tabIndex={0}
                   onKeyDown={e => onNavKeyDown(e, "settingsAccount")}
+                  type="button"
                 >
                   Account
-                  <span className="fc-nav-chevron-sm">{dropdowns.settingsAccount ? "▶" : "▶"}</span>
+                  <span className="fc-nav-chevron-sm">{dropdowns.settingsAccount ? "▼" : "▶"}</span>
                 </button>
                 {/* Nested dropdown for Account */}
                 <ul
