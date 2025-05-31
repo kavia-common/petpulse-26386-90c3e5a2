@@ -22,11 +22,46 @@
   border-bottom: 1.5px solid var(--fc-border);
   box-shadow: var(--fc-shadow);
   font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  display: flex;
-  align-items: center;
   height: 60px;
   min-height: 60px;
   padding: 0;
+  /* Remove direct flex here for content separation */
+}
+
+/* Flexbox wrapper for aligning brand left, nav right */
+.fc-navbar-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Brand header left-aligned (default) */
+.fc-nav-horizontal-header {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 6px;
+  padding: 0 36px 0 26px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--fc-primary);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Nav items list right-aligned in row */
+.fc-nav-horizontal-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0 36px 0 0;
+  height: 100%;
+  gap: 0;
+  justify-content: flex-end;
 }
 
 .fc-nav-horizontal-header {
@@ -238,9 +273,16 @@
 
 /* Responsive: collapse side padding on small screens */
 @media (max-width: 900px) {
+  .fc-navbar-content {
+    padding-right: 0;
+    padding-left: 0;
+  }
   .fc-nav-horizontal-header {
     font-size: 1rem;
     padding: 0 12px 0 8px;
+  }
+  .fc-nav-horizontal-list {
+    padding-right: 8px;
   }
   .fc-logo {
     font-size: 1.1rem;
