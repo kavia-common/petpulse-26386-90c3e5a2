@@ -2,69 +2,76 @@ import React, { useState } from "react";
 import "./FurEverCareNav.css";
 
 /*
-  FurEverCareNav Navigation Component for the FurEverCare platform
+  FurEverCareNav Navigation Component – Strict Dropdown Hierarchy
 
-  Features:
-    - Main Heading: FurEverCare logo/title on the left
-    - Horizontal root menu bar:
-        - My Pets (dropdown: Pet Profiles, Health Tracker, Diet & Nutrition, Activity)
-        - Appointments (dropdown: Manage)
-        - Settings (dropdown: Account > (Login, Signup), Support, Contact, Help, About & Privacy)
-  Notes:
-    - Horizontal nav with dropdowns for submenus
-    - Mobile-responsiveness NOT explicitly handled here but structure enables it
-    - Brand color palette and light theme
+  - My Pets: dropdown with Pet Profiles, Health Tracker, Diet & Nutrition, Activity
+  - Appointments: dropdown with Manage
+  - Settings: dropdown
+      - Account (as submenu, downward): 
+          - Login
+          - Signup
+      - Support
+      - Contact
+      - Help
+      - About & Privacy
+
+  Sub-dropdown for Account must only appear under Settings > Account, 
+  with correct open/close interaction.
 */
 
 // PUBLIC_INTERFACE
 function FurEverCareNav() {
-  // State for opened/closed dropdowns
-  const [dropdowns, setDropdowns] = useState({
+  // Track root dropdowns & subdropdown (account under settings)
+  const [dropdownOpen, setDropdownOpen] = useState({
     myPets: false,
     appointments: false,
     settings: false,
     settingsAccount: false,
   });
 
-  // Helper to open one root menu and close others (always closes submenus unless root is "settings" - see below)
-  const handleRootOpen = menu =>
-    setDropdowns(prev => ({
+  // Root: open only specified menu, close others/submenus (except special for account)
+  function handleRootOpen(menu) {
+    setDropdownOpen(prev => ({
       myPets: menu === "myPets",
       appointments: menu === "appointments",
       settings: menu === "settings",
-      // Only keep Account submenu open if explicitly open action for it (hover/click on Account)
-      settingsAccount: (menu === "settingsAccount") ? true : false,
+      settingsAccount: menu === "settingsAccount" ? true : false,
     }));
+  }
 
-  // Open Settings root, but not Account submenu yet
-  const handleSettingsHover = () =>
-    setDropdowns(prev => ({
+  // For hover/focus on root settings only (don't open account menu)
+  function handleSettingsRootHover() {
+    setDropdownOpen(prev => ({
       myPets: false,
       appointments: false,
       settings: true,
       settingsAccount: false,
     }));
+  }
 
-  const handleSettingsAccountOpen = () =>
-    setDropdowns(prev => ({
+  // For Account sub-dropdown open under settings
+  function handleSettingsAccountOpen() {
+    setDropdownOpen(prev => ({
       myPets: false,
       appointments: false,
       settings: true,
       settingsAccount: true,
     }));
+  }
 
-  // Close all dropdowns (for nav mouse leave or Esc)
-  const handleCloseAll = () =>
-    setDropdowns({
+  // Close all dropdowns (root + sub)
+  function handleCloseAll() {
+    setDropdownOpen({
       myPets: false,
       appointments: false,
       settings: false,
       settingsAccount: false,
     });
+  }
 
-  // Keyboard support (basic)
-  const onNavKeyDown = (e, menu) => {
-    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+  // Keyboard support
+  function onNavKeyDown(e, menu) {
+    if (["Enter", " ", "ArrowDown"].includes(e.key)) {
       e.preventDefault();
       if (menu === "settingsAccount") {
         handleSettingsAccountOpen();
@@ -74,14 +81,14 @@ function FurEverCareNav() {
     } else if (e.key === "Escape") {
       handleCloseAll();
     }
-  };
+  }
 
-  // Accessibility: close submenus if settings closes
+  // Accessibility: close subdropdown if its parent closes
   React.useEffect(() => {
-    if (!dropdowns.settings && dropdowns.settingsAccount) {
-      setDropdowns(d => ({ ...d, settingsAccount: false }));
+    if (!dropdownOpen.settings && dropdownOpen.settingsAccount) {
+      setDropdownOpen(d => ({ ...d, settingsAccount: false }));
     }
-  }, [dropdowns.settings, dropdowns.settingsAccount]);
+  }, [dropdownOpen.settings, dropdownOpen.settingsAccount]);
 
   return (
     <nav
@@ -94,10 +101,9 @@ function FurEverCareNav() {
         <div className="fc-nav-horizontal-header">
           <span className="fc-logo" aria-label="FurEverCare Logo">🐾</span>
           <span className="fc-title">FurEverCare</span>
-          {/* Login and Signup buttons removed from here; now under Settings > Account */}
         </div>
         <ul className="fc-nav-horizontal-list">
-          {/* Dashboard */}
+          {/* Dashboard – not in dropdown */}
           <li className="fc-nav-horizontal-item">
             <a
               className="fc-nav-horizontal-section"
@@ -114,7 +120,7 @@ function FurEverCareNav() {
           <li
             className={
               "fc-nav-horizontal-item" +
-              (dropdowns.myPets ? " open" : "")
+              (dropdownOpen.myPets ? " open" : "")
             }
             onMouseEnter={() => handleRootOpen("myPets")}
             onFocus={() => handleRootOpen("myPets")}
@@ -122,17 +128,18 @@ function FurEverCareNav() {
           >
             <button
               className="fc-nav-horizontal-section"
-              aria-expanded={dropdowns.myPets}
+              aria-expanded={dropdownOpen.myPets}
               aria-haspopup="true"
               onClick={() => handleRootOpen("myPets")}
               tabIndex={0}
               onKeyDown={e => onNavKeyDown(e, "myPets")}
+              type="button"
             >
               <span className="fc-nav-icon" style={{ color: "var(--fc-primary)" }}>🐶</span>
               My Pets
-              <span className="fc-nav-chevron">{dropdowns.myPets ? "▲" : "▼"}</span>
+              <span className="fc-nav-chevron">{dropdownOpen.myPets ? "▲" : "▼"}</span>
             </button>
-            <ul className={"fc-nav-horizontal-dropdown" + (dropdowns.myPets ? " open" : "")}>
+            <ul className={"fc-nav-horizontal-dropdown" + (dropdownOpen.myPets ? " open" : "")}>
               <li><a href="#pet-profiles">Pet Profiles</a></li>
               <li><a href="#health-tracker">Health Tracker</a></li>
               <li><a href="#diet-nutrition">Diet &amp; Nutrition</a></li>
@@ -144,7 +151,7 @@ function FurEverCareNav() {
           <li
             className={
               "fc-nav-horizontal-item" +
-              (dropdowns.appointments ? " open" : "")
+              (dropdownOpen.appointments ? " open" : "")
             }
             onMouseEnter={() => handleRootOpen("appointments")}
             onFocus={() => handleRootOpen("appointments")}
@@ -152,66 +159,67 @@ function FurEverCareNav() {
           >
             <button
               className="fc-nav-horizontal-section"
-              aria-expanded={dropdowns.appointments}
+              aria-expanded={dropdownOpen.appointments}
               aria-haspopup="true"
               onClick={() => handleRootOpen("appointments")}
               tabIndex={0}
               onKeyDown={e => onNavKeyDown(e, "appointments")}
+              type="button"
             >
               <span className="fc-nav-icon" style={{ color: "var(--fc-secondary)" }}>📅</span>
               Appointments
-              <span className="fc-nav-chevron">{dropdowns.appointments ? "▲" : "▼"}</span>
+              <span className="fc-nav-chevron">{dropdownOpen.appointments ? "▲" : "▼"}</span>
             </button>
-            <ul className={"fc-nav-horizontal-dropdown" + (dropdowns.appointments ? " open" : "")}>
+            <ul className={"fc-nav-horizontal-dropdown" + (dropdownOpen.appointments ? " open" : "")}>
               <li><a href="#appointments-manage">Manage</a></li>
             </ul>
           </li>
 
-          {/* Settings with Account multi-level dropdown */}
+          {/* Settings and sub-dropdown for Account (Login/Signup), plus other direct subitems */}
           <li
             className={
               "fc-nav-horizontal-item" +
-              (dropdowns.settings ? " open" : "")
+              (dropdownOpen.settings ? " open" : "")
             }
-            onMouseEnter={handleSettingsHover}
-            onFocus={handleSettingsHover}
+            onMouseEnter={handleSettingsRootHover}
+            onFocus={handleSettingsRootHover}
             onMouseLeave={handleCloseAll}
           >
             <button
               className="fc-nav-horizontal-section"
-              aria-expanded={dropdowns.settings}
+              aria-expanded={dropdownOpen.settings}
               aria-haspopup="true"
               onClick={() => handleRootOpen("settings")}
               tabIndex={0}
               onKeyDown={e => onNavKeyDown(e, "settings")}
+              type="button"
             >
               <span className="fc-nav-icon" style={{ color: "var(--fc-accent)" }}>⚙️</span>
               Settings
-              <span className="fc-nav-chevron">{dropdowns.settings ? "▲" : "▼"}</span>
+              <span className="fc-nav-chevron">{dropdownOpen.settings ? "▲" : "▼"}</span>
             </button>
-            <ul className={"fc-nav-horizontal-dropdown" + (dropdowns.settings ? " open" : "")}>
+            <ul className={"fc-nav-horizontal-dropdown" + (dropdownOpen.settings ? " open" : "")}>
+              {/* Account > Login/Signup */}
               <li
                 className={
                   "fc-nav-horiz-subitem" +
-                  (dropdowns.settingsAccount ? " open" : "")
+                  (dropdownOpen.settingsAccount ? " open" : "")
                 }
                 onMouseEnter={handleSettingsAccountOpen}
                 onFocus={handleSettingsAccountOpen}
                 onMouseLeave={() =>
-                  setDropdowns(d => ({ ...d, settingsAccount: false }))
+                  setDropdownOpen(d => ({ ...d, settingsAccount: false }))
                 }
               >
                 <button
                   className="fc-nav-horizontal-subsection"
                   aria-haspopup="true"
-                  aria-expanded={dropdowns.settingsAccount}
+                  aria-expanded={dropdownOpen.settingsAccount}
                   onClick={e => {
                     e.stopPropagation();
-                    // Toggle open/close on click (allow touchscreen/click)
-                    setDropdowns(d => ({
+                    setDropdownOpen(d => ({
                       ...d,
                       settingsAccount: !d.settingsAccount,
-                      // keep settings open
                       settings: true,
                     }));
                   }}
@@ -220,13 +228,12 @@ function FurEverCareNav() {
                   type="button"
                 >
                   Account
-                  <span className="fc-nav-chevron-sm">{dropdowns.settingsAccount ? "▼" : "▶"}</span>
+                  <span className="fc-nav-chevron-sm">{dropdownOpen.settingsAccount ? "▼" : "▶"}</span>
                 </button>
-                {/* Nested dropdown for Account */}
                 <ul
                   className={
                     "fc-nav-horizontal-supdropdown" +
-                    (dropdowns.settingsAccount ? " open" : "")
+                    (dropdownOpen.settingsAccount ? " open" : "")
                   }
                 >
                   <li>
@@ -237,6 +244,7 @@ function FurEverCareNav() {
                   </li>
                 </ul>
               </li>
+              {/* Settings direct items (not submenus) */}
               <li><a href="#support">Support</a></li>
               <li><a href="#contact">Contact</a></li>
               <li><a href="#help">Help</a></li>
