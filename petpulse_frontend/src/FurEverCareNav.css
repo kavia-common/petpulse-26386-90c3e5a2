@@ -51,77 +51,119 @@
   user-select: none;
 }
 
-.fc-auth-btn-group {
+/* Removed .fc-auth-btn-group and .fc-auth-btn styles as Login/Signup now appear as dropdown menu items.
+   Any button-specific styling for auth that is menu-like will use link/menu-item style.
+*/
+
+/* --- Updated or added multi-level dropdown styles --- */
+.fc-nav-horizontal-dropdown li {
+  position: relative; /* Needed for sub-dropdown positioning */
+}
+
+/* Supdropdown (second-level under Account) already has core styles, but improve: */
+.fc-nav-horizontal-supdropdown {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 154px;
+  background: var(--fc-bg-light);
+  border-left: 2.5px solid var(--fc-border);
+  box-shadow: 0 7px 18px rgba(92,120,130, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0) translateX(9px);
+  transition: opacity 0.13s, transform 0.15s, visibility 0.13s;
+  z-index: 52;
+  border-radius: 0 8px 8px 0;
+  padding: 0 0 0 0;
+}
+
+/* Open state for subdropdown (shows Account sub menu) */
+.fc-nav-horiz-subitem.open > .fc-nav-horizontal-supdropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) translateX(0);
+}
+
+/* Account button styles (as submenu trigger) */
+.fc-nav-horizontal-subsection {
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px 26px 8px 36px;
+  border-radius: 3px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--fc-nav-sub-text);
+  outline: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-left: 34px;
+  transition: background 0.14s, color 0.14s;
+  position: relative;
+}
+.fc-nav-horizontal-subsection:focus,
+.fc-nav-horizontal-subsection:hover {
+  background: var(--fc-nav-hover);
+  color: var(--fc-primary);
 }
 
-.fc-auth-btn {
-  display: inline-block;
-  padding: 8px 22px;
-  font-size: 1.04rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(90deg, var(--fc-primary) 0%, var(--fc-accent) 90%);
+/* Added for consistency: submenu link style (Login/Signup links) */
+.fc-nav-horizontal-supdropdown a {
+  padding: 8px 21px 8px 28px;
+  color: var(--fc-nav-sub-text);
+  text-decoration: none;
+  background: none;
   border: none;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: background 0.14s, box-shadow 0.16s, color 0.13s;
-  box-shadow: 0 1.5px 13px -4px rgba(80,126,110, 0.13);
-  outline: none;
-  margin-right: 0;
+  border-radius: 3px;
+  font-size: 0.97rem;
+  display: block;
+  transition: background 0.11s, color 0.11s;
+  font-weight: 500;
 }
-
-.fc-auth-btn:focus,
-.fc-auth-btn:hover {
-  background: linear-gradient(90deg, #2b8b88 0%, #fd8b5b 98%);
+.fc-nav-horizontal-supdropdown a:hover,
+.fc-nav-horizontal-supdropdown a:focus {
+  background: var(--fc-accent);
   color: #fff;
-  box-shadow: 0 0 0 2px var(--fc-bg), 0 2px 14px -5px var(--fc-accent);
-  text-decoration: none;
+  outline: none;
 }
 
-.fc-auth-login {
-  background: linear-gradient(90deg, var(--fc-primary) 0%, var(--fc-secondary) 100%);
+/* Chevron style for submenu trigger (Account) */
+.fc-nav-chevron-sm {
+  margin-left: 10px;
+  font-size: 0.7rem;
+  color: var(--fc-nav-sub-text);
+  pointer-events: none;
 }
 
-.fc-auth-login:focus,
-.fc-auth-login:hover {
-  background: linear-gradient(90deg, #457a6d 0%, #ffdd97 100%);
-}
-
-.fc-auth-signup {
-  background: linear-gradient(90deg, var(--fc-accent) 0%, var(--fc-primary) 90%);
-}
-
-.fc-auth-signup:focus,
-.fc-auth-signup:hover {
-  background: linear-gradient(90deg, #fd8b5b 0%, #52b39d 90%);
-}
-
-/* Responsive: make auth buttons wrap or shrink gap on mobile/tablet */
+/* Responsive fix for mobile: dropdown width and spacing */
 @media (max-width: 900px) {
-  .fc-auth-btn-group {
-    gap: 7px;
-    margin-left: 8px;
+  .fc-nav-horizontal-dropdown {
+    min-width: 142px;
   }
-  .fc-auth-btn {
-    font-size: 0.93rem;
-    padding: 7px 13px;
+  .fc-nav-horizontal-supdropdown {
+    min-width: 110px;
+  }
+  .fc-nav-horizontal-subsection {
+    padding: 8px 13px 8px 19px;
+    font-size: 0.94rem;
   }
 }
 @media (max-width: 650px) {
-  .fc-auth-btn-group {
-    gap: 4px;
-    margin-left: 2vw;
+  .fc-nav-horizontal-dropdown {
+    min-width: 98px;
+    font-size: 0.92rem;
   }
-  .fc-auth-btn {
-    padding: 6px 7vw;
+  .fc-nav-horizontal-supdropdown {
+    min-width: 87px;
     font-size: 0.9rem;
-    min-width: 73px;
   }
 }
+
+/* --- The rest is unchanged (core nav styles) --- */
 
 /* Nav items list right-aligned in row */
 .fc-nav-horizontal-list {
