@@ -125,10 +125,10 @@ function FurEverCareNav() {
               <span className="fc-nav-chevron">{dropdown.myPets ? "▲" : "▼"}</span>
             </button>
             <ul className={"fc-nav-horizontal-dropdown" + (dropdown.myPets ? " open" : "")}>
-              <li><a href="#pet-profiles">Pet Profiles</a></li>
-              <li><a href="#health-tracker">Health Tracker</a></li>
-              <li><a href="#diet-nutrition">Diet &amp; Nutrition</a></li>
-              <li><a href="#activity">Activity</a></li>
+              <li><Link to="/dashboard#pet-profiles">Pet Profiles</Link></li>
+              <li><Link to="/dashboard#health-tracker">Health Tracker</Link></li>
+              <li><Link to="/dashboard#diet-nutrition">Diet & Nutrition</Link></li>
+              <li><Link to="/dashboard#activity">Activity</Link></li>
             </ul>
           </li>
           {/* Appointments dropdown */}
@@ -154,7 +154,7 @@ function FurEverCareNav() {
               <span className="fc-nav-chevron">{dropdown.appointments ? "▲" : "▼"}</span>
             </button>
             <ul className={"fc-nav-horizontal-dropdown" + (dropdown.appointments ? " open" : "")}>
-              <li><a href="#appointments-manage">Manage</a></li>
+              <li><Link to="/dashboard#appointments-manage">Manage</Link></li>
             </ul>
           </li>
           {/* Settings dropdown with sub-dropdown for Account */}
@@ -214,14 +214,14 @@ function FurEverCareNav() {
                     (dropdown.account ? " open" : "")
                   }
                 >
-                  <li><a href="#account-login">Login</a></li>
-                  <li><a href="#account-signup">Signup</a></li>
+                  <li><Link to="/dashboard#account-login">Login</Link></li>
+                  <li><Link to="/dashboard#account-signup">Signup</Link></li>
                 </ul>
               </li>
-              <li><a href="#support">Support</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#help">Help</a></li>
-              <li><a href="#about-privacy">About &amp; Privacy</a></li>
+              <li><Link to="/dashboard#support">Support</Link></li>
+              <li><Link to="/dashboard#contact">Contact</Link></li>
+              <li><Link to="/dashboard#help">Help</Link></li>
+              <li><Link to="/dashboard#about-privacy">About & Privacy</Link></li>
             </ul>
           </li>
         </ul>
