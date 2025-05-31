@@ -92,11 +92,12 @@ function FurEverCareNav() {
     >
       <div className="fc-navbar-content">
         <div className="fc-nav-horizontal-header">
-          <span className="fc-logo" aria-label="FurEverCare Logo">🐾</span>
-          <span className="fc-title">FurEverCare</span>
+          <a href="#main" className="fc-logo" aria-label="FurEverCare Logo" style={{ textDecoration: "none" }}>🐾</a>
+          <a href="#main" className="fc-title" style={{ color: "var(--fc-primary)", textDecoration: "none" }}>FurEverCare</a>
         </div>
+        {/* The navigation bar structure strictly as specified */}
         <ul className="fc-nav-horizontal-list">
-          {/* My Pets */}
+          {/* My Pets dropdown */}
           <li
             className={
               "fc-nav-horizontal-item" + (dropdown.myPets ? " open" : "")
@@ -125,8 +126,7 @@ function FurEverCareNav() {
               <li><a href="#activity">Activity</a></li>
             </ul>
           </li>
-
-          {/* Appointments */}
+          {/* Appointments dropdown */}
           <li
             className={
               "fc-nav-horizontal-item" + (dropdown.appointments ? " open" : "")
@@ -152,8 +152,7 @@ function FurEverCareNav() {
               <li><a href="#appointments-manage">Manage</a></li>
             </ul>
           </li>
-
-          {/* Settings */}
+          {/* Settings dropdown with sub-dropdown for Account */}
           <li
             className={
               "fc-nav-horizontal-item" + (dropdown.settings ? " open" : "")
@@ -176,7 +175,7 @@ function FurEverCareNav() {
               <span className="fc-nav-chevron">{dropdown.settings ? "▲" : "▼"}</span>
             </button>
             <ul className={"fc-nav-horizontal-dropdown" + (dropdown.settings ? " open" : "")}>
-              {/* Account > Login/Signup (sub-dropdown) */}
+              {/* Account (vertical sub-dropdown) */}
               <li
                 className={
                   "fc-nav-horiz-subitem" + (dropdown.account ? " open" : "")
