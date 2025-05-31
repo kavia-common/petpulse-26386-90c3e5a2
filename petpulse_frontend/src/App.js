@@ -3,6 +3,7 @@ import './App.css';
 import FurEverCareLandingPage from './FurEverCareLandingPage';
 import FurEverCareHomePage from './FurEverCareHomePage';
 import FurEverCareNav from './FurEverCareNav';
+import DashboardPage from './DashboardPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 /**
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<FurEverCareLandingPage />} />
             <Route path="/dashboard" element={<FurEverCareHomePage />} />
+            <Route path="/dashboard2" element={<DashboardPage />} />
             {/* Add more routes as the app grows */}
           </Routes>
         </div>
