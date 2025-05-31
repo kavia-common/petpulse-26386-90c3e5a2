@@ -68,6 +68,10 @@ function FurEverCareNav() {
         <div className="fc-nav-horizontal-header">
           <span className="fc-logo" aria-label="FurEverCare Logo">🐾</span>
           <span className="fc-title">FurEverCare</span>
+          <div className="fc-auth-btn-group">
+            <a href="#account-login" className="fc-auth-btn fc-auth-login">Login</a>
+            <a href="#account-signup" className="fc-auth-btn fc-auth-signup">Signup</a>
+          </div>
         </div>
         <ul className="fc-nav-horizontal-list">
           {/* Dashboard */}
