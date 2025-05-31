@@ -70,6 +70,19 @@ function FurEverCareNav() {
           <span className="fc-title">FurEverCare</span>
         </div>
         <ul className="fc-nav-horizontal-list">
+          {/* Dashboard */}
+          <li className="fc-nav-horizontal-item">
+            <a
+              className="fc-nav-horizontal-section"
+              href="#dashboard"
+              tabIndex={0}
+              style={{ color: "var(--fc-primary)" }}
+            >
+              <span className="fc-nav-icon" style={{ color: "var(--fc-primary)" }}>🏠</span>
+              Dashboard
+            </a>
+          </li>
+
           {/* My Pets */}
           <li
             className={
