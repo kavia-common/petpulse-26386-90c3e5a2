@@ -11,194 +11,259 @@
   --fc-shadow: 0 2px 8px rgba(76, 109, 124, 0.06);
 }
 
-.furevercare-nav {
-  width: 270px;
-  min-height: 100vh;
-  background: var(--fc-bg);
-  border-right: 1.5px solid var(--fc-border);
-  padding: 0;
+.furevercare-nav-horizontal {
+  /* Horizontal sticky bar at the top */
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 110;
+  background: var(--fc-bg-light);
+  border-bottom: 1.5px solid var(--fc-border);
   box-shadow: var(--fc-shadow);
-  display: flex;
-  flex-direction: column;
-  position: relative;
   font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-}
-
-.fc-nav-heading {
   display: flex;
   align-items: center;
-  padding: 24px 28px 12px 28px;
-  background: var(--fc-bg-light);
-  font-size: 1.4rem;
-  font-weight: bold;
+  height: 60px;
+  min-height: 60px;
+  padding: 0;
+}
+
+.fc-nav-horizontal-header {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 6px;
+  padding: 0 36px 0 26px;
+  font-weight: 700;
+  font-size: 1.2rem;
   color: var(--fc-primary);
-  border-bottom: 1px solid var(--fc-border);
-  letter-spacing: 0.5px;
-  outline: none;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .fc-logo {
-  font-size: 1.6rem;
-  margin-right: 8px;
+  font-size: 1.45rem;
+  margin-right: 5px;
   filter: drop-shadow(0 0 1px var(--fc-secondary));
 }
 
 .fc-title {
   font-weight: 700;
   color: var(--fc-primary);
+  font-size: 1.2rem;
 }
 
-.fc-nav-list {
+.fc-nav-horizontal-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   list-style: none;
-  padding: 0;
   margin: 0;
-  flex: 1;
+  padding: 0;
+  height: 100%;
+  gap: 0;
 }
 
-.fc-nav-section {
-  width: 100%;
-  padding: 14px 28px 14px 38px;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--fc-nav-text);
-  font-size: 1.08rem;
-  font-weight: 600;
-  cursor: pointer;
+.fc-nav-horizontal-item {
+  position: relative;
+  /* Ensures dropdown is positioned absolutely from here */
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+.fc-nav-horizontal-item.open .fc-nav-horizontal-section,
+.fc-nav-horizontal-item .fc-nav-horizontal-section:focus,
+.fc-nav-horizontal-item .fc-nav-horizontal-section:hover {
+  background: var(--fc-nav-hover);
+}
+
+.fc-nav-horizontal-section {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--fc-nav-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0 22px;
+  height: 100%;
+  cursor: pointer;
   transition: background 0.1s;
-  border-radius: 4px 0 0 4px;
+  border-bottom: 2.5px solid transparent;
+  /* To indicate active/focus/hover, color highlight below */
 }
-.fc-nav-section:hover, .fc-nav-section:focus {
+.fc-nav-horizontal-section:focus,
+.fc-nav-horizontal-section:hover {
   background: var(--fc-nav-hover);
 }
 
 .fc-nav-icon {
   margin-right: 10px;
-  font-size: 1.22rem;
+  font-size: 1.16rem;
   vertical-align: bottom;
 }
 
-.fc-nav-chevron, .fc-nav-chevron-sm {
-  margin-left: 18px;
-  font-size: 0.75rem;
+.fc-nav-chevron,
+.fc-nav-chevron-sm {
+  margin-left: 10px;
+  font-size: 0.77rem;
   color: var(--fc-nav-sub-text);
   pointer-events: none;
 }
-
 .fc-nav-chevron-sm {
-  margin-left: 8px;
+  margin-left: 5px;
   font-size: 0.7rem;
 }
 
-/* Sublist (submenu for each section) */
-.fc-nav-sublist {
+.fc-nav-horizontal-dropdown {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  min-width: 182px;
+  background: var(--fc-bg-light);
+  color: var(--fc-nav-text);
+  border-bottom: 2px solid var(--fc-border);
+  box-shadow: 0 5px 18px rgba(80,126,110, .09);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition: opacity 0.11s, transform 0.13s, visibility 0.13s;
+  z-index: 51;
+  border-radius: 0 0 9px 9px;
+  padding: 7px 0;
+}
+
+.fc-nav-horizontal-item.open > .fc-nav-horizontal-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Dropdown Items */
+.fc-nav-horizontal-dropdown li {
   list-style: none;
-  padding: 0 0 0 21px;
   margin: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.14s linear;
-  background: var(--fc-bg);
 }
-.fc-nav-sublist.open {
-  max-height: 350px;
-  border-bottom: 0;
-  transition: max-height 0.16s cubic-bezier(0.15, 0.82, 0.55, 1);
-}
-
-.fc-nav-sublist li {
-  margin: 2px 0;
-}
-.fc-nav-sublist li a {
-  display: block;
-  color: var(--fc-nav-sub-text);
-  text-decoration: none;
-  padding: 10px 12px 10px 24px;
-  font-size: 1rem;
-  background: var(--fc-bg);
-  border-radius: 4px;
-  transition: background 0.15s, color 0.15s;
-}
-.fc-nav-sublist li a:hover, .fc-nav-sublist li a:focus {
-  background: var(--fc-secondary);
-  color: #fff;
-  outline: none;
-}
-
-/* Nested submenu in Settings -> Account */
-.fc-nav-subsection {
-  width: 100%;
-  background: transparent;
-  outline: none;
-  border: none;
-  color: var(--fc-nav-sub-text);
-  font-size: 0.98rem;
-  font-weight: 600;
-  cursor: pointer;
+.fc-nav-horizontal-dropdown a,
+.fc-nav-horizontal-dropdown button.fc-nav-horizontal-subsection {
   display: flex;
   align-items: center;
-  margin-top: 4px;
-  padding: 7px 12px 7px 32px;
-  border-radius: 4px;
-  transition: background 0.13s;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--fc-nav-sub-text);
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 9px 26px 9px 36px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 3px;
+  transition: background 0.14s, color 0.14s;
 }
-.fc-nav-subsection:hover, .fc-nav-subsection:focus {
+.fc-nav-horizontal-dropdown a:hover,
+.fc-nav-horizontal-dropdown a:focus,
+.fc-nav-horizontal-dropdown button.fc-nav-horizontal-subsection:hover,
+.fc-nav-horizontal-dropdown button.fc-nav-horizontal-subsection:focus {
   background: var(--fc-nav-hover);
+  color: var(--fc-primary);
 }
 
-.fc-nav-supersublist {
-  list-style: none;
-  padding-left: 13px;
+.fc-nav-horizontal-subsection {
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px 26px 8px 36px;
+  border-radius: 3px;
+}
+
+.fc-nav-horiz-subitem {
+  position: relative;
+}
+
+.fc-nav-horizontal-supdropdown {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 154px;
+  background: var(--fc-bg-light);
+  border-left: 2.5px solid var(--fc-border);
+  box-shadow: 0 7px 18px rgba(92,120,130, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0) translateX(9px);
+  transition: opacity 0.13s, transform 0.15s, visibility 0.13s;
+  z-index: 52;
+  border-radius: 0 8px 8px 0;
+  padding: 0 0 0 0;
+}
+
+.fc-nav-horiz-subitem.open > .fc-nav-horizontal-supdropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) translateX(0);
+}
+.fc-nav-horizontal-supdropdown li {
   margin: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.14s linear;
-  background: var(--fc-bg);
 }
-.fc-nav-supersublist.open {
-  max-height: 80px;
-  transition: max-height 0.21s cubic-bezier(0.17, 0.84, 0.44, 1);
-}
-
-.fc-nav-supersublist li a {
-  display: block;
+.fc-nav-horizontal-supdropdown a {
+  padding: 8px 21px 8px 28px;
   color: var(--fc-nav-sub-text);
   text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: 3px;
   font-size: 0.97rem;
-  padding: 7px 8px 7px 36px;
-  border-radius: 4px;
-  background: var(--fc-bg);
-  transition: background 0.1s, color 0.12s;
+  display: block;
+  transition: background 0.11s, color 0.11s;
 }
-.fc-nav-supersublist li a:hover, .fc-nav-supersublist li a:focus {
+.fc-nav-horizontal-supdropdown a:hover,
+.fc-nav-horizontal-supdropdown a:focus {
   background: var(--fc-accent);
   color: #fff;
   outline: none;
 }
 
-/* Remove button default style */
-.fc-nav-section,
-.fc-nav-subsection {
-  background: none;
-  border: none;
-  text-align: left;
-  outline: none;
+/* Accessibility: makes menu buttons appear focused when using keyboard nav */
+.fc-nav-horizontal-section:focus-visible,
+.fc-nav-horizontal-subsection:focus-visible {
+  outline: 2px solid var(--fc-primary);
 }
 
-/* For overall responsiveness */
+/* Responsive: collapse side padding on small screens */
 @media (max-width: 900px) {
-  .furevercare-nav {
-    width: 220px;
-    font-size: 0.9rem;
+  .fc-nav-horizontal-header {
+    font-size: 1rem;
+    padding: 0 12px 0 8px;
   }
-  .fc-nav-heading {
-    font-size: 1.18rem;
-    padding: 20px 16px 10px 16px;
+  .fc-logo {
+    font-size: 1.1rem;
   }
-  .fc-nav-section, .fc-nav-subsection {
-    padding-left: 22px;
+  .fc-nav-horizontal-section {
+    font-size: 0.98rem;
+    padding: 0 9px;
   }
+}
+
+@media (max-width: 650px) {
+  .furevercare-nav-horizontal {
+    font-size: 0.94rem;
+  }
+  .fc-nav-horizontal-section {
+    padding: 0 3vw;
+  }
+  .fc-nav-horizontal-header {
+    padding: 0 4vw 0 2vw;
+  }
+}
+
+/* Hide the original vertical nav, for horizontal only */
+.furevercare-nav:not(.furevercare-nav-horizontal) {
+  display: none !important;
 }
