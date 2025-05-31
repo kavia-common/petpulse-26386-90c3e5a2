@@ -51,6 +51,78 @@
   user-select: none;
 }
 
+.fc-auth-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: 34px;
+}
+
+.fc-auth-btn {
+  display: inline-block;
+  padding: 8px 22px;
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, var(--fc-primary) 0%, var(--fc-accent) 90%);
+  border: none;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.14s, box-shadow 0.16s, color 0.13s;
+  box-shadow: 0 1.5px 13px -4px rgba(80,126,110, 0.13);
+  outline: none;
+  margin-right: 0;
+}
+
+.fc-auth-btn:focus,
+.fc-auth-btn:hover {
+  background: linear-gradient(90deg, #2b8b88 0%, #fd8b5b 98%);
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--fc-bg), 0 2px 14px -5px var(--fc-accent);
+  text-decoration: none;
+}
+
+.fc-auth-login {
+  background: linear-gradient(90deg, var(--fc-primary) 0%, var(--fc-secondary) 100%);
+}
+
+.fc-auth-login:focus,
+.fc-auth-login:hover {
+  background: linear-gradient(90deg, #457a6d 0%, #ffdd97 100%);
+}
+
+.fc-auth-signup {
+  background: linear-gradient(90deg, var(--fc-accent) 0%, var(--fc-primary) 90%);
+}
+
+.fc-auth-signup:focus,
+.fc-auth-signup:hover {
+  background: linear-gradient(90deg, #fd8b5b 0%, #52b39d 90%);
+}
+
+/* Responsive: make auth buttons wrap or shrink gap on mobile/tablet */
+@media (max-width: 900px) {
+  .fc-auth-btn-group {
+    gap: 7px;
+    margin-left: 8px;
+  }
+  .fc-auth-btn {
+    font-size: 0.93rem;
+    padding: 7px 13px;
+  }
+}
+@media (max-width: 650px) {
+  .fc-auth-btn-group {
+    gap: 4px;
+    margin-left: 2vw;
+  }
+  .fc-auth-btn {
+    padding: 6px 7vw;
+    font-size: 0.9rem;
+    min-width: 73px;
+  }
+}
+
 /* Nav items list right-aligned in row */
 .fc-nav-horizontal-list {
   display: flex;
