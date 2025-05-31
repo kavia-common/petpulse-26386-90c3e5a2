@@ -26,11 +26,34 @@ function FurEverCareNav() {
     settingsAccount: false,
   });
 
-  const handleDropdown = menu => setDropdowns(d => ({
-    ...d,
-    [menu]: !d[menu]
-  }));
+  // Helper to open one root menu and close others (always closes submenus unless root is "settings" - see below)
+  const handleRootOpen = menu =>
+    setDropdowns(prev => ({
+      myPets: menu === "myPets",
+      appointments: menu === "appointments",
+      settings: menu === "settings",
+      // Only keep Account submenu open if explicitly open action for it (hover/click on Account)
+      settingsAccount: (menu === "settingsAccount") ? true : false,
+    }));
 
+  // Open Settings root, but not Account submenu yet
+  const handleSettingsHover = () =>
+    setDropdowns(prev => ({
+      myPets: false,
+      appointments: false,
+      settings: true,
+      settingsAccount: false,
+    }));
+
+  const handleSettingsAccountOpen = () =>
+    setDropdowns(prev => ({
+      myPets: false,
+      appointments: false,
+      settings: true,
+      settingsAccount: true,
+    }));
+
+  // Close all dropdowns (for nav mouse leave or Esc)
   const handleCloseAll = () =>
     setDropdowns({
       myPets: false,
@@ -39,23 +62,26 @@ function FurEverCareNav() {
       settingsAccount: false,
     });
 
-  // Ensures only one dropdown is open at root level at a time
-  const handleRootOpen = menu => setDropdowns({
-    myPets: menu === "myPets",
-    appointments: menu === "appointments",
-    settings: menu === "settings",
-    settingsAccount: false,
-  });
-
-  // For keyboard menu navigation accessibility (optional, basic)
+  // Keyboard support (basic)
   const onNavKeyDown = (e, menu) => {
     if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
       e.preventDefault();
-      handleRootOpen(menu);
+      if (menu === "settingsAccount") {
+        handleSettingsAccountOpen();
+      } else {
+        handleRootOpen(menu);
+      }
     } else if (e.key === "Escape") {
       handleCloseAll();
     }
   };
+
+  // Accessibility: close submenus if settings closes
+  React.useEffect(() => {
+    if (!dropdowns.settings && dropdowns.settingsAccount) {
+      setDropdowns(d => ({ ...d, settingsAccount: false }));
+    }
+  }, [dropdowns.settings, dropdowns.settingsAccount]);
 
   return (
     <nav
@@ -68,10 +94,7 @@ function FurEverCareNav() {
         <div className="fc-nav-horizontal-header">
           <span className="fc-logo" aria-label="FurEverCare Logo">🐾</span>
           <span className="fc-title">FurEverCare</span>
-          <div className="fc-auth-btn-group">
-            <a href="#account-login" className="fc-auth-btn fc-auth-login">Login</a>
-            <a href="#account-signup" className="fc-auth-btn fc-auth-signup">Signup</a>
-          </div>
+          {/* Login and Signup buttons removed from here; now under Settings > Account */}
         </div>
         <ul className="fc-nav-horizontal-list">
           {/* Dashboard */}
@@ -95,6 +118,7 @@ function FurEverCareNav() {
             }
             onMouseEnter={() => handleRootOpen("myPets")}
             onFocus={() => handleRootOpen("myPets")}
+            onMouseLeave={handleCloseAll}
           >
             <button
               className="fc-nav-horizontal-section"
@@ -124,6 +148,7 @@ function FurEverCareNav() {
             }
             onMouseEnter={() => handleRootOpen("appointments")}
             onFocus={() => handleRootOpen("appointments")}
+            onMouseLeave={handleCloseAll}
           >
             <button
               className="fc-nav-horizontal-section"
@@ -142,14 +167,15 @@ function FurEverCareNav() {
             </ul>
           </li>
 
-          {/* Settings */}
+          {/* Settings with Account multi-level dropdown */}
           <li
             className={
               "fc-nav-horizontal-item" +
               (dropdowns.settings ? " open" : "")
             }
-            onMouseEnter={() => handleRootOpen("settings")}
-            onFocus={() => handleRootOpen("settings")}
+            onMouseEnter={handleSettingsHover}
+            onFocus={handleSettingsHover}
+            onMouseLeave={handleCloseAll}
           >
             <button
               className="fc-nav-horizontal-section"
@@ -164,7 +190,43 @@ function FurEverCareNav() {
               <span className="fc-nav-chevron">{dropdowns.settings ? "▲" : "▼"}</span>
             </button>
             <ul className={"fc-nav-horizontal-dropdown" + (dropdowns.settings ? " open" : "")}>
-              {/* Removed Account -> (Login, Signup) section since those buttons are now visible as main nav actions */}
+              <li
+                className={
+                  "fc-nav-horiz-subitem" +
+                  (dropdowns.settingsAccount ? " open" : "")
+                }
+                onMouseEnter={handleSettingsAccountOpen}
+                onFocus={handleSettingsAccountOpen}
+                onMouseLeave={() =>
+                  setDropdowns(d => ({ ...d, settingsAccount: false }))
+                }
+              >
+                <button
+                  className="fc-nav-horizontal-subsection"
+                  aria-haspopup="true"
+                  aria-expanded={dropdowns.settingsAccount}
+                  onClick={handleSettingsAccountOpen}
+                  tabIndex={0}
+                  onKeyDown={e => onNavKeyDown(e, "settingsAccount")}
+                >
+                  Account
+                  <span className="fc-nav-chevron-sm">{dropdowns.settingsAccount ? "▶" : "▶"}</span>
+                </button>
+                {/* Nested dropdown for Account */}
+                <ul
+                  className={
+                    "fc-nav-horizontal-supdropdown" +
+                    (dropdowns.settingsAccount ? " open" : "")
+                  }
+                >
+                  <li>
+                    <a href="#account-login">Login</a>
+                  </li>
+                  <li>
+                    <a href="#account-signup">Signup</a>
+                  </li>
+                </ul>
+              </li>
               <li><a href="#support">Support</a></li>
               <li><a href="#contact">Contact</a></li>
               <li><a href="#help">Help</a></li>
