@@ -1,0 +1,323 @@
+:root {
+  --fc-primary: #4E8D7C;
+  --fc-secondary: #F7C873;
+  --fc-accent: #F26B6B;
+  --fc-bg: #f9fbfa;
+  --fc-bg-light: #fff;
+  --fc-nav-text: #23413E;
+  --fc-nav-sub-text: #49786F;
+  --fc-nav-hover: #E9F8F4;
+  --fc-border: #e3e6e4;
+  --fc-shadow: 0 2px 8px rgba(76, 109, 124, 0.06);
+}
+
+/* --- Navigation Bar Styles --- */
+.furevercare-nav-horizontal {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 110;
+  background: var(--fc-bg-light);
+  border-bottom: 1.5px solid var(--fc-border);
+  box-shadow: var(--fc-shadow);
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  height: 60px;
+  min-height: 60px;
+  padding: 0;
+}
+.fc-navbar-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.fc-nav-horizontal-header {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 6px;
+  padding: 0 36px 0 26px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--fc-primary);
+  white-space: nowrap;
+  user-select: none;
+}
+.fc-logo {
+  font-size: 1.45rem;
+  margin-right: 5px;
+  filter: drop-shadow(0 0 1px var(--fc-secondary));
+}
+.fc-title {
+  font-weight: 700;
+  color: var(--fc-primary);
+  font-size: 1.2rem;
+}
+/* --- Nav List and Items --- */
+.fc-nav-horizontal-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0 36px 0 0;
+  height: 100%;
+  gap: 0;
+  justify-content: flex-end;
+}
+.fc-nav-horizontal-item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+.fc-nav-horizontal-item.open .fc-nav-horizontal-section,
+.fc-nav-horizontal-item .fc-nav-horizontal-section:focus,
+.fc-nav-horizontal-item .fc-nav-horizontal-section:hover {
+  background: var(--fc-nav-hover);
+}
+.fc-nav-horizontal-section {
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--fc-nav-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0 22px;
+  height: 100%;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-bottom: 2.5px solid transparent;
+}
+.fc-nav-horizontal-section:focus,
+.fc-nav-horizontal-section:hover {
+  background: var(--fc-nav-hover);
+}
+
+/* Icon and Chevron Styles */
+.fc-nav-icon {
+  margin-right: 10px;
+  font-size: 1.16rem;
+  vertical-align: bottom;
+}
+.fc-nav-chevron,
+.fc-nav-chevron-sm {
+  margin-left: 10px;
+  font-size: 0.77rem;
+  color: var(--fc-nav-sub-text);
+  pointer-events: none;
+}
+.fc-nav-chevron-sm {
+  margin-left: 5px;
+  font-size: 0.7rem;
+  transition: transform 0.15s;
+}
+
+/* --- Dropdown Styles --- */
+.fc-nav-horizontal-dropdown {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  min-width: 182px;
+  background: var(--fc-bg-light);
+  color: var(--fc-nav-text);
+  border-bottom: 2px solid var(--fc-border);
+  box-shadow: 0 5px 18px rgba(80,126,110, .09);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition: opacity 0.11s, transform 0.13s, visibility 0.13s;
+  z-index: 51;
+  border-radius: 0 0 9px 9px;
+  padding: 7px 0;
+}
+.fc-nav-horizontal-item.open > .fc-nav-horizontal-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.fc-nav-horizontal-dropdown li {
+  position: relative;
+  list-style: none;
+  margin: 0;
+}
+.fc-nav-horizontal-dropdown a,
+.fc-nav-horizontal-dropdown button.fc-nav-horizontal-subsection {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--fc-nav-sub-text);
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 9px 26px 9px 36px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 3px;
+  transition: background 0.14s, color 0.14s;
+}
+.fc-nav-horizontal-dropdown a:hover,
+.fc-nav-horizontal-dropdown a:focus,
+.fc-nav-horizontal-dropdown button.fc-nav-horizontal-subsection:hover,
+.fc-nav-horizontal-dropdown button.fc-nav-horizontal-subsection:focus {
+  background: var(--fc-nav-hover);
+  color: var(--fc-primary);
+}
+
+/* --- Account SubDropdown (vertical, downward) --- */
+.fc-nav-horiz-subitem {
+  position: relative;
+}
+
+/* Begin: Refactored for downward submenu under Account */
+.fc-nav-horizontal-supdropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;   /* Start below Account button */
+  min-width: 154px;
+  background: var(--fc-bg-light);
+  border-top: 2.5px solid var(--fc-border);
+  box-shadow: 0 7px 18px rgba(92,120,130, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(9px);
+  transition: opacity 0.13s, transform 0.15s, visibility 0.13s;
+  z-index: 52;
+  border-radius: 0 0 8px 8px;
+  padding: 0;
+  margin-top: 0;
+}
+.fc-nav-horiz-subitem.open > .fc-nav-horizontal-supdropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+/* Chevron points down for vertical dropdown (<Account v>) */
+.fc-nav-horizontal-subsection .fc-nav-chevron-sm {
+  margin-left: 10px;
+  font-size: 0.7rem;
+  color: var(--fc-nav-sub-text);
+  transform: rotate(90deg);
+}
+.fc-nav-horiz-subitem.open .fc-nav-horizontal-subsection .fc-nav-chevron-sm {
+  transform: rotate(180deg);
+}
+
+/* Supdropdown children full width and styled */
+.fc-nav-horizontal-supdropdown li {
+  margin: 0;
+  width: 100%;
+}
+.fc-nav-horizontal-supdropdown a {
+  padding: 8px 21px 8px 28px;
+  color: var(--fc-nav-sub-text);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.97rem;
+  display: block;
+  transition: background 0.11s, color 0.11s;
+  font-weight: 500;
+}
+.fc-nav-horizontal-supdropdown a:hover,
+.fc-nav-horizontal-supdropdown a:focus {
+  background: var(--fc-accent);
+  color: #fff;
+  outline: none;
+}
+.fc-nav-horizontal-subsection {
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px 26px 8px 36px;
+  border-radius: 3px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--fc-nav-sub-text);
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.14s, color 0.14s;
+  position: relative;
+}
+.fc-nav-horizontal-subsection:focus,
+.fc-nav-horizontal-subsection:hover {
+  background: var(--fc-nav-hover);
+  color: var(--fc-primary);
+}
+/* End downward Account dropdown */
+
+/* Accessibility: focus ring for keyboard nav */
+.fc-nav-horizontal-section:focus-visible,
+.fc-nav-horizontal-subsection:focus-visible {
+  outline: 2px solid var(--fc-primary);
+}
+
+/* --- Responsive Breakpoints --- */
+@media (max-width: 900px) {
+  .fc-navbar-content {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .fc-nav-horizontal-header {
+    font-size: 1rem;
+    padding: 0 12px 0 8px;
+  }
+  .fc-nav-horizontal-list {
+    padding-right: 8px;
+  }
+  .fc-logo {
+    font-size: 1.1rem;
+  }
+  .fc-nav-horizontal-section {
+    font-size: 0.98rem;
+    padding: 0 9px;
+  }
+  .fc-nav-horizontal-dropdown {
+    min-width: 142px;
+  }
+  .fc-nav-horizontal-supdropdown {
+    min-width: 110px;
+  }
+  .fc-nav-horizontal-subsection {
+    padding: 8px 13px 8px 19px;
+    font-size: 0.94rem;
+  }
+}
+@media (max-width: 650px) {
+  .furevercare-nav-horizontal {
+    font-size: 0.94rem;
+  }
+  .fc-nav-horizontal-section {
+    padding: 0 3vw;
+  }
+  .fc-nav-horizontal-header {
+    padding: 0 4vw 0 2vw;
+  }
+  .fc-nav-horizontal-dropdown {
+    min-width: 98px;
+    font-size: 0.92rem;
+  }
+  .fc-nav-horizontal-supdropdown {
+    min-width: 87px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Hide the original vertical nav, for horizontal only */
+.furevercare-nav:not(.furevercare-nav-horizontal) {
+  display: none !important;
+}

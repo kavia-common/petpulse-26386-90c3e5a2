@@ -1,0 +1,638 @@
+.fecHomePageWrap {
+  font-family: 'Poppins', 'Montserrat', 'Nunito', 'Lato', sans-serif;
+  background: linear-gradient(to right, #B2EBF2 0%, #E6E6FA 100%);
+  min-height: 100vh;
+  color: #344046;
+}
+.headerBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+  background: linear-gradient(88deg, #B2EBF2 50%, #E6E6FA 100%);
+  box-shadow: 0 2px 12px rgba(80, 121, 120, 0.04);
+  height: 72px;
+}
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1260px;
+  margin: 0 auto;
+  height: 72px;
+  padding: 0 36px;
+}
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logoSymbol {
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 2px #e1f2ed70);
+}
+.logoText {
+  font-size: 1.42rem;
+  font-weight: 800;
+  color: #4E8D7C;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+.topNav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.navLink {
+  font-weight: 600;
+  font-size: 1.09rem;
+  color: #49786F;
+  text-decoration: none;
+  transition: color 0.14s;
+  padding: 7px 17px;
+  border-radius: 16px;
+}
+.navLink:hover,
+.navLink:focus {
+  color: #4E8D7C;
+  background: #c6ecea38;
+}
+.avatarMenu {
+  margin-left: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(99deg, #f8dede 0%, #B2EBF2 110%);
+  border-radius: 18px;
+  padding: 3px 8px;
+  cursor: pointer;
+  box-shadow: 0 2.5px 10px #b5e0eb22;
+  font-size: 1.1rem;
+}
+.avatarImg {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 4px;
+  border: 2.5px solid #eeeaea7a;
+}
+.avatarChevron {
+  color: #8b97a2;
+  font-size: 0.87em;
+  margin-left: 2px;
+}
+
+.mainContent {
+  margin-top: 90px;
+  padding-bottom: 34px;
+  min-height: 74vh;
+}
+.heroSection {
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+  background: linear-gradient(112deg, #B2EBF2 75%, #f4e9fa 100%);
+  border-radius: 30px;
+  box-shadow: 0 6px 34px 0 #8fd2db2c;
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+  min-height: 216px;
+  padding: 44px 38px 40px 38px;
+  gap: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.heroContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.heroTextWrap {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  z-index: 3;
+}
+.heroWelcome {
+  font-size: 2.3rem;
+  font-weight: 600;
+  color: #476176;
+  margin-bottom: 3px;
+  margin-top: 0;
+  letter-spacing: -.007em;
+  line-height: 1.17em;
+}
+.heroSubtitle {
+  color: #4E8D7C;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  opacity: .89;
+  letter-spacing: 0.02em;
+  max-width: 415px;
+}
+.heroActions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 10px;
+  margin-top: 2px;
+}
+.primaryBtn {
+  background: linear-gradient(92deg, #B2EBF2 60%, #4E8D7C 120%);
+  color: #175256;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.07rem;
+  padding: 10px 30px;
+  cursor: pointer;
+  box-shadow: 0 3px 15px #b2ebf233;
+  transition: background .20s, color .15s;
+}
+.primaryBtn:hover {
+  background: linear-gradient(86deg, #4E8D7C 38%, #B2EBF2 110%);
+  color: #fff;
+}
+.secondaryBtn {
+  background: linear-gradient(87deg, #F7C873 85%, #fff0c2 100%);
+  color: #935d15;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.07rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  box-shadow: 0 2.5px 15px #F7C87322;
+  cursor: pointer;
+  transition: background .17s;
+}
+.secondaryBtn:hover {
+  background: #feebb2;
+  color: #bc6c1b;
+}
+.ghostBtn {
+  background: transparent;
+  color: #7758ad;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 10px 19px;
+  box-shadow: none;
+  transition: background .16s, color .13s;
+}
+.ghostBtn:hover {
+  background: #e6e6fa55;
+  color: #483b68;
+}
+.heroImage {
+  flex: 1;
+  min-width: 150px;
+  background: linear-gradient(160deg, #e6e6fa 75%, #f7c873 100%);
+  height: 126px;
+  max-width: 160px;
+  margin-top: 36px;
+  margin-left: 38px;
+  border-radius: 23px;
+  box-shadow: 0 4px 14px #b2ebf235, 0 6px 38px #ecf9f944;
+  background-image: url("https://cdn.pixabay.com/photo/2016/02/19/10/00/dog-1209764_1280.jpg");
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+  opacity: .93;
+  /* add paw print watermark overlay */
+  position: relative;
+}
+.heroImage:after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 13px;
+  width: 42px;
+  height: 45px;
+  background: url("data:image/svg+xml,%3Csvg fill='rgba(183,245,237,0.41)' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='9.7' cy='12' rx='3' ry='4.2'/%3E%3Cellipse cx='22.3' cy='12' rx='3' ry='4.2'/%3E%3Cellipse cx='16' cy='8.4' rx='2.3' ry='3'/%3E%3Cellipse cx='28.2' cy='18' rx='1.8' ry='2.7'/%3E%3Cellipse cx='3.8' cy='17.7' rx='1.8' ry='2.7'/%3E%3Cellipse cx='16' cy='19' rx='8.6' ry='6.7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: .75;
+}
+.layoutRow {
+  display: flex;
+  gap: 34px;
+  margin: 0 auto 0 auto;
+  max-width: 1260px;
+  width: 100%;
+}
+.mainLeftCol {
+  flex: 2.3;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.mainRightCol {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+}
+.sectionTitle {
+  font-size: 1.48rem;
+  color: #4E8D7C;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.sectionTitleSmall {
+  margin-top: 3px;
+  margin-bottom: 15px;
+  color: #a49fc2;
+  font-size: 1.13em;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* === Pet Summary Cards Grid === */
+.petGridSection {
+  width: 100%;
+}
+.petGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  width: 100%;
+}
+.petCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 3px 18px 0 #d1e3e765;
+  border-radius: 25px;
+  padding: 28px 23px 17px 23px;
+  background: #fff;
+  min-width: 0;
+  min-height: 182px;
+  transition: transform .14s, box-shadow .14s;
+  position: relative;
+  overflow: visible;
+  will-change: transform;
+  /* pastel blur accent glow */
+  filter: drop-shadow(0 8px 15px #b2ebf219);
+}
+.petCard:hover {
+  transform: translateY(-4px) scale(1.018);
+  box-shadow: 0 9px 38px 0 #e6e6fa77;
+  background: linear-gradient(133deg, #E6E6FA 55%, #fbe5ef 100%);
+  z-index: 2;
+}
+.petImg {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  box-shadow: 0 3px 22px #b2ebf249;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.petInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.petName {
+  font-weight: 700;
+  color: #4E8D7C;
+  font-size: 1.2em;
+  margin-bottom: 2px;
+}
+.petBreed {
+  font-size: 0.97em;
+  color: #938cb6;
+  margin-bottom: 7px;
+}
+.petQuickActions {
+  display: flex;
+  gap: 9px;
+  margin-top: 7px;
+}
+.quickActionBtn {
+  background: linear-gradient(97deg,#B2EBF2 72%,#E6E6FA 120%);
+  border: none;
+  color: #4E8D7C;
+  font-weight: 600;
+  font-size: 0.96em;
+  border-radius: 12px;
+  padding: 5px 17px;
+  cursor: pointer;
+  transition: background .13s, color .13s;
+  box-shadow: 0 1px 10px #b2ebf230;
+}
+.quickActionBtn:hover {
+  background: linear-gradient(115deg,#F7C873 65%,#B2EBF2 100%);
+  color: #fff;
+}
+
+/* === Health Summary Tiles === */
+.healthSummarySection {
+  display: flex;
+  gap: 19px;
+  margin-top: 21px;
+  margin-bottom: 6px;
+  justify-content: stretch;
+  flex-wrap: wrap;
+}
+.healthTile {
+  background: #f7f9fa;
+  border-radius: 22px;
+  box-shadow: 0 2px 9px #e6e6fa41;
+  flex: 1;
+  min-width: 136px;
+  padding: 17px 17px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  position: relative;
+}
+.healthTileIcon {
+  margin-bottom: 2px;
+  margin-right: 4px;
+  display: inline-block;
+}
+.healthTileLabel {
+  font-size: 0.98em;
+  font-weight: 600;
+  color: #697587;
+  margin-bottom: 4px;
+}
+.healthTileValue {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #4E8D7C;
+}
+
+/* === Reminders/Notifications === */
+.remindersPanel {
+  background: linear-gradient(117deg, #fff8fa 80%, #CEFAF5 100%);
+  border-radius: 30px;
+  box-shadow: 0 4px 20px #e6e6fa2b;
+  padding: 18px 20px 20px 20px;
+  max-width: 340px;
+  width: 100%;
+  min-width: 232px;
+  margin-top: 7px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+.remindersList {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-right: 3px;
+  margin-top: 7px;
+  padding-right: 2px;
+}
+.reminderCard {
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 16px 10px 13px;
+  background: linear-gradient(89deg, #E6E6FA 31%, #B2EBF2 84%);
+  color: #4e8d7c;
+  font-size: 1.03em;
+  font-weight: 500;
+  box-shadow: 0 2.5px 9px #b2ebf23b;
+  min-height: 41px;
+  margin-bottom: 3px;
+}
+.reminderIcon {
+  font-size: 1.12em;
+  margin-right: 4px;
+  display: inline-flex;
+  align-items: center;
+}
+.reminderText {
+  font-size: 1em;
+  color: #5a677a;
+}
+
+/* === Tips/Highlights Carousel === */
+.tipsCarouselSection {
+  margin-top: 23px;
+  margin-bottom: 16px;
+}
+.tipsCarouselList {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  padding-bottom: 7px;
+  scrollbar-width: thin;
+}
+.tipsCard {
+  background: linear-gradient(98deg, #fffefc 66%, #E6E6FA 105%);
+  box-shadow: 0 2px 10px #e6e6fa38;
+  border-radius: 20px;
+  min-width: 192px;
+  max-width: 228px;
+  flex: 0 0 192px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 17px 20px 12px 18px;
+  margin-bottom: 3px;
+  position: relative;
+  transition: background .13s;
+}
+.tipsCard:hover {
+  background: linear-gradient(119deg, #F7C873 80%, #B2EBF2 120%);
+  color: #fff !important;
+}
+.tipsCardIcon {
+  font-size: 1.45em;
+  margin-bottom: 3px;
+}
+.tipsCardVideo {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.tipsCardTitle {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #4E8D7C;
+  margin-bottom: 2px;
+}
+.tipsCardDesc {
+  color: #7758ad;
+  font-size: 0.99em;
+  font-weight: 400;
+}
+
+/* === Footer === */
+.footer {
+  width: 100vw;
+  margin-top: 64px;
+  background: linear-gradient(93deg, #E6E6FA 74%, #CEFAF5 99%);
+  border-radius: 0 0 36px 36px;
+  box-shadow: 0 -3px 18px #b2ebf238;
+  padding: 28px 0 10px 0;
+}
+.footerContent {
+  max-width: 1260px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 19vw;
+  padding: 0 34px;
+  min-height: 45px;
+}
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 1.19rem;
+  color: #4E8D7C;
+}
+.footerBrandTitle {
+  color: #4E8D7C;
+  font-weight: 700;
+  font-size: 1.05em;
+}
+.footerLinks {
+  display: flex;
+  gap: 23px;
+}
+.footerLinks a {
+  color: #5A677A;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.08em;
+  border-radius: 12px;
+  padding: 2px 15px;
+  transition: background .14s;
+}
+.footerLinks a:hover,
+.footerLinks a:focus {
+  background: #b2ebf232;
+  color: #4E8D7C;
+}
+.footerSocial {
+  display: flex;
+  gap: 13px;
+}
+.footerSocial a {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border-radius: 99px;
+  transition: background .14s;
+}
+.footerSocial a:hover {
+  background: #b2ebf239;
+}
+.footerCopyright {
+  text-align: center;
+  color: #a3b1c3;
+  margin-top: 10px;
+  font-size: 0.95em;
+  padding-bottom: 4px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* ============ RESPONSIVE =========== */
+@media (max-width: 1100px) {
+  .headerInner, .mainContent, .footerContent, .layoutRow {
+    padding-left: 8vw;
+    padding-right: 8vw;
+  }
+  .layoutRow {
+    gap: 4vw;
+  }
+}
+@media (max-width: 900px) {
+  .headerInner, .footerContent {
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+  .mainContent {
+    margin-top: 78px;
+    padding-left: 9px;
+    padding-right: 7px;
+  }
+  .layoutRow {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .mainRightCol {
+    min-width: unset;
+    max-width: unset;
+    padding-bottom: 0;
+    width: auto;
+    margin-bottom: 50px;
+  }
+  .petGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 600px) {
+  .headerBg {
+    height: 56px;
+  }
+  .headerInner {
+    height: 56px;
+    padding: 0 13px;
+  }
+  .footerContent {
+    padding: 0 9px;
+    flex-direction: column;
+    gap: 11px;
+    align-items: flex-start;
+  }
+  .footer {
+    border-radius: 28px 28px 0 0;
+    padding-top: 17px;
+  }
+  .heroSection {
+    min-height: 120px;
+    padding: 15px 10px;
+    border-radius: 15px;
+  }
+  .heroWelcome {
+    font-size: 1.15rem;
+  }
+  .petGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #f3f7f88c;
+  border-radius: 13px;
+}
